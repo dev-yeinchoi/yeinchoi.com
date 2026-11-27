@@ -1,0 +1,352 @@
+/* Work · 활동 책장 */
+
+.w-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 32px;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-top: var(--space-56);
+}
+
+.w-head__text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.w-head__text h1,
+.w-head__text p {
+  margin: 0;
+}
+
+.w-head__text p {
+  color: var(--label-alt);
+}
+
+.w-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.w-shelf {
+  padding: 20px 0 72px;
+}
+
+/* 책이 줄지어 서는 무대. 끌어서 넘길 수 있어요. */
+.w-stage {
+  position: relative;
+  height: 420px;
+  overflow: hidden;
+  touch-action: pan-y;
+  user-select: none;
+  cursor: grab;
+}
+
+.w-stage[data-dragging="true"] {
+  cursor: grabbing;
+}
+
+.w-track {
+  position: absolute;
+  left: 50%;
+  bottom: 60px;
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  transition: transform 750ms cubic-bezier(0.45, 0.05, 0.2, 1);
+}
+
+.w-stage[data-dragging="true"] .w-track {
+  transition: none;
+}
+
+.w-slot {
+  position: relative;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 책 한 권이 차지하는 자리. 펼치면 표지 너비만큼 넓어져요. */
+.w-book-wrap {
+  position: relative;
+  perspective: 2000px;
+  transition: transform 420ms var(--ease-spring), width 750ms cubic-bezier(0.45, 0.05, 0.2, 1),
+    margin 750ms cubic-bezier(0.45, 0.05, 0.2, 1);
+}
+
+.w-book-wrap:hover {
+  transform: translateY(-14px);
+}
+
+.w-book {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 850ms cubic-bezier(0.45, 0.05, 0.2, 1);
+}
+
+.w-book:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+.w-spine,
+.w-cover {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  box-sizing: border-box;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.w-spine {
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0 12px;
+  border-radius: 6px 6px 4px 4px;
+  box-shadow: inset -4px 0 0 rgba(0, 0, 0, 0.1), inset 3px 0 0 rgba(255, 255, 255, 0.22);
+}
+
+.w-spine__year {
+  font-size: 10px;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.w-spine__title {
+  max-height: 70%;
+  overflow: hidden;
+  white-space: nowrap;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.w-spine__mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 1.5px dashed currentColor;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.w-cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 18px 16px 16px;
+  border-radius: 4px 12px 12px 4px;
+  color: var(--cool-10);
+  box-shadow: inset 7px 0 0 rgba(0, 0, 0, 0.08);
+}
+
+.w-cover__type,
+.w-cover__period {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.w-cover__period {
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.w-cover__title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.023em;
+}
+
+/* 여권 도장 */
+.w-stamp {
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 74px;
+  height: 74px;
+  border: 3px double currentColor;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.1;
+  text-align: center;
+  transform: rotate(-10deg);
+}
+
+.w-stamp small {
+  font-size: 8px;
+  font-weight: 500;
+}
+
+.w-shadow {
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  height: 14px;
+  border-radius: 999px;
+  background: radial-gradient(closest-side, rgba(23, 23, 25, 0.18), rgba(23, 23, 25, 0));
+  pointer-events: none;
+  transform: translateX(-50%);
+  transition: width 750ms cubic-bezier(0.45, 0.05, 0.2, 1), opacity 400ms;
+}
+
+.w-group {
+  position: absolute;
+  left: 0;
+  bottom: -40px;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* 고른 활동 설명 */
+.w-detail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.w-detail__side {
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.w-detail__side--end {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.w-detail__side .t-label2 {
+  font-weight: 600;
+}
+
+.w-detail__side .t-label1 {
+  font-weight: 400;
+  color: var(--label-alt);
+}
+
+.w-detail__main {
+  flex: 2 1 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.w-detail__main h2,
+.w-detail__main p {
+  margin: 0;
+}
+
+.w-detail__main p {
+  max-width: 460px;
+  color: var(--label-neutral);
+}
+
+.w-pop {
+  animation: w-pop 420ms var(--ease-spring) both;
+}
+
+.w-pop--late {
+  animation-delay: 60ms;
+}
+
+@keyframes w-pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.w-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.w-ticks {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  height: 20px;
+}
+
+.w-tick {
+  width: 2px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--line-strong);
+  transition: height 300ms var(--ease-spring), background 300ms;
+}
+
+.w-tick[data-on="true"] {
+  height: 20px;
+  background: var(--label-normal);
+}
+
+@media (max-width: 640px) {
+  .w-detail__side {
+    flex-basis: 100%;
+    order: 1;
+  }
+
+  .w-detail__side--end {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .w-track,
+  .w-book,
+  .w-book-wrap,
+  .w-shadow,
+  .w-tick {
+    transition: none;
+  }
+
+  .w-book-wrap:hover {
+    transform: none;
+  }
+
+  .w-pop {
+    animation: none;
+  }
+}
