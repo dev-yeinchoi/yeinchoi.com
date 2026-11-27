@@ -17,5 +17,12 @@ export const site = {
   },
 } as const;
 
-/** GNB 메뉴. 메뉴·페이지 이름은 영어, 설명은 한국어. 화면이 생길 때마다 추가해요. */
-export const nav: ReadonlyArray<{ href: string; label: string }> = [];
+/** GNB 메뉴. 메뉴·페이지 이름은 영어, 설명은 한국어. */
+export const nav = [
+  { href: "/about", label: "About" },
+  { href: "/project", label: "Project" },
+  { href: "/work", label: "Work" },
+  { href: "/blog", label: "Blog" },
+  { href: "/gallery", label: "Gallery" },
+  { href: "/design-system", label: "Design System" },
+] as const;
