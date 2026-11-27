@@ -1,0 +1,575 @@
+/* Blog · 글 읽기 */
+
+/* 위쪽 읽기 바: GNB 바로 아래에 붙어요 */
+.b-bar {
+  position: sticky;
+  top: var(--gnb-height);
+  z-index: 9;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line-alt);
+}
+
+.b-bar__in {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 720px;
+  height: 48px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.b-bar__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  height: 36px;
+  margin-left: -10px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  color: var(--label-normal);
+  cursor: pointer;
+  transition: background var(--dur-fast) ease;
+}
+
+.b-bar__toggle:hover {
+  background: var(--fill);
+}
+
+.b-bar__label {
+  flex: 0 0 auto;
+  font-weight: 600;
+}
+
+.b-bar__dot {
+  color: var(--label-assist);
+}
+
+.b-bar__current {
+  overflow: hidden;
+  min-width: 0;
+  font-size: 14px;
+  color: var(--label-alt);
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.b-bar__current--solo {
+  font-weight: 600;
+  color: var(--label-normal);
+}
+
+.b-bar__chev {
+  flex: 0 0 auto;
+  transition: transform 200ms;
+}
+
+.b-bar__chev.is-open {
+  transform: rotate(180deg);
+}
+
+.b-bar__pct {
+  flex: 0 0 auto;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--label-alt);
+}
+
+.b-bar__track {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+}
+
+.b-bar__fill {
+  height: 100%;
+  background: var(--primary);
+  transition: width 120ms linear;
+}
+
+.b-toc {
+  position: absolute;
+  top: 46px;
+  left: 14px;
+  width: min(300px, calc(100vw - 28px));
+  padding: 8px;
+  border: 1px solid var(--line-alt);
+  border-radius: 12px;
+  background: var(--bg);
+  box-shadow: 0 8px 28px rgba(23, 23, 25, 0.1);
+  animation: b-fade 160ms ease both;
+}
+
+.b-toc__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 40px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--label-neutral);
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--dur-fast) ease;
+}
+
+.b-toc__item:hover,
+.b-toc__item.is-current {
+  background: var(--fill);
+}
+
+.b-toc__item.is-current {
+  font-weight: 600;
+  color: var(--label-normal);
+}
+
+.b-toc__n {
+  font-size: 12px;
+  color: var(--label-assist);
+}
+
+/* 글 머리 */
+.b-post {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px var(--gutter) 72px;
+}
+
+.b-crumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--label-alt);
+}
+
+.b-crumb a {
+  color: var(--label-alt);
+  text-decoration: none;
+}
+
+.b-crumb a:hover {
+  color: var(--label-normal);
+}
+
+.b-crumb__cat {
+  font-weight: 600;
+  color: var(--label-neutral);
+}
+
+.b-post__title {
+  margin: 16px 0 20px;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.334;
+  letter-spacing: -0.027em;
+  word-break: keep-all;
+}
+
+.b-post__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--label-alt);
+}
+
+.b-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: var(--fill-strong);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--label-neutral);
+}
+
+.b-post__author {
+  font-weight: 600;
+  color: var(--label-normal);
+}
+
+.b-cover {
+  margin: 0;
+  padding: 36px 0 40px;
+}
+
+.b-cover img,
+.b-cover__empty {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+.b-cover__empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-alt);
+  color: var(--label-assist);
+}
+
+/* 본문 */
+.prose {
+  font-size: 17px;
+  line-height: 1.76;
+  letter-spacing: 0.004em;
+  color: var(--label-neutral);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.prose > :first-child {
+  margin-top: 0;
+}
+
+.prose p {
+  margin: 0 0 1.5em;
+}
+
+.prose h2,
+.prose h3 {
+  color: var(--label-normal);
+  scroll-margin-top: calc(var(--gnb-height) + 48px + 24px);
+}
+
+.prose h2 {
+  margin: 2.4em 0 0.8em;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.364;
+  letter-spacing: -0.02em;
+}
+
+.prose h3 {
+  margin: 2em 0 0.6em;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.445;
+}
+
+.prose a {
+  color: var(--primary-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose strong {
+  font-weight: 600;
+  color: var(--label-normal);
+}
+
+.prose ul,
+.prose ol {
+  margin: 0 0 1.5em;
+  padding-left: 1.3em;
+}
+
+.prose li {
+  margin: 0.35em 0;
+}
+
+.prose blockquote {
+  margin: 2em 0;
+  padding: 2px 0 2px 20px;
+  border-left: 3px solid var(--label-normal);
+  font-weight: 500;
+  color: var(--label-normal);
+}
+
+.prose blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.prose img {
+  display: block;
+  max-width: 100%;
+  margin: 2em auto;
+  border-radius: 12px;
+}
+
+.prose hr {
+  margin: 3em 0;
+  border: 0;
+  border-top: 1px solid var(--line-alt);
+}
+
+.prose :not(pre) > code {
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: var(--fill);
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+}
+
+.prose table {
+  width: 100%;
+  margin: 0 0 1.5em;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.prose th,
+.prose td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line-alt);
+  text-align: left;
+}
+
+/* 코드 블록 */
+.b-code {
+  --sh-keyword: #c2187a;
+  --sh-string: #0a7d3e;
+  --sh-comment: var(--label-alt);
+  --sh-class: #a64b00;
+  --sh-entity: #0055d4;
+  --sh-identifier: var(--label-normal);
+  --sh-property: var(--label-normal);
+  --sh-jsxliterals: var(--label-normal);
+  --sh-sign: var(--label-alt);
+
+  margin: 1.6em 0 2em;
+  overflow: hidden;
+  border: 1px solid var(--line-alt);
+  border-radius: 12px;
+  background: var(--code-bg);
+}
+
+[data-theme="dark"] .b-code {
+  --sh-keyword: #ff7ac6;
+  --sh-string: #6fd69a;
+  --sh-class: #ffb46b;
+  --sh-entity: #7fb2ff;
+}
+
+.b-code__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  padding: 0 8px 0 16px;
+  border-bottom: 1px solid var(--line-alt);
+}
+
+.b-code__name {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--label-alt);
+}
+
+.b-code__actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.b-code pre {
+  margin: 0;
+  padding: 18px 20px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--label-normal);
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+.b-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--label-alt);
+  cursor: pointer;
+  transition: background var(--dur-fast) ease;
+}
+
+.b-icon-btn:hover {
+  background: var(--fill);
+}
+
+.b-ok {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary-text);
+  animation: b-ok 1600ms ease both;
+}
+
+@keyframes b-ok {
+  0% {
+    opacity: 0;
+  }
+  15%,
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* 글 끝: 태그 + 링크 복사 */
+.b-post__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 48px;
+  padding: 24px 0;
+  border-top: 1px solid var(--line-alt);
+  border-bottom: 1px solid var(--line-alt);
+}
+
+.b-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.b-tag {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 8px;
+  background: var(--fill);
+  font-size: 14px;
+  color: var(--label-neutral);
+}
+
+.b-copy-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.b-copy-link .b-ok {
+  font-size: 13px;
+}
+
+.b-outline-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--label-normal);
+  cursor: pointer;
+  transition: background var(--dur-fast) ease;
+}
+
+.b-outline-btn:hover {
+  background: var(--fill);
+}
+
+/* 이전 글 · 다음 글 */
+.b-adjacent {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  padding-top: 32px;
+}
+
+.b-adjacent__item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: inherit;
+  text-decoration: none;
+  transition: background var(--dur-fast) ease;
+}
+
+.b-adjacent__item:hover {
+  background: var(--fill);
+}
+
+.b-adjacent__item--next {
+  grid-column: 2;
+  text-align: right;
+}
+
+.b-adjacent__label {
+  font-size: 13px;
+  color: var(--label-alt);
+}
+
+.b-adjacent__title {
+  overflow: hidden;
+  font-size: 16px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.b-back {
+  display: flex;
+  justify-content: center;
+  padding-top: 32px;
+}
+
+@media (max-width: 640px) {
+  .b-post__title {
+    font-size: 28px;
+  }
+
+  .b-adjacent {
+    grid-template-columns: 1fr;
+  }
+
+  .b-adjacent > span:empty {
+    display: none;
+  }
+
+  .b-adjacent__item--next {
+    grid-column: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .b-bar__fill,
+  .b-bar__chev {
+    transition: none;
+  }
+
+  .b-toc,
+  .b-ok {
+    animation: none;
+  }
+}
