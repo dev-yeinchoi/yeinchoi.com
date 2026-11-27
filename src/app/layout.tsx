@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
+import { Footer, Gnb } from "@/components/ui";
 import { site } from "@/content/site";
+import "@/styles/globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -24,7 +26,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko">
       <body>
+        <Gnb />
         <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

@@ -1,0 +1,213 @@
+/*
+ * yeinchoi.com design tokens
+ * Wanted Design System(Montage) 기반. 화면에서는 hex 대신 의미 토큰(--label-*, --bg-*, --line-*, --primary*)만 써요.
+ * 원자 팔레트와 카테고리 색은 라이트·다크에서 같고, 의미 토큰만 [data-theme="dark"]에서 바뀌어요.
+ */
+
+:root {
+  /* ---------- Atomic palette (Wanted Atomic) ---------- */
+  --blue-95: #eaf2fe;
+  --blue-90: #c9defe;
+  --blue-80: #9ec5ff;
+  --blue-70: #69a5ff;
+  --blue-60: #3385ff;
+  --blue-50: #0066ff;
+  --blue-40: #0054d1;
+  --blue-30: #003e9c;
+
+  --violet-95: #f0ecfe;
+  --violet-90: #dbd3fe;
+  --violet-80: #c0b0ff;
+  --violet-70: #9e86fc;
+  --violet-60: #7d5ef7;
+  --violet-50: #6541f2;
+  --violet-40: #4f29e5;
+  --violet-30: #3a16c9;
+
+  --green-95: #d9ffe6;
+  --green-90: #acfcc7;
+  --green-80: #7df5a5;
+  --green-70: #49e57d;
+  --green-60: #1ed45a;
+  --green-50: #00bf40;
+  --green-40: #009632;
+  --green-30: #006e25;
+
+  --redorange-95: #feeee5;
+  --redorange-90: #fed9c4;
+  --redorange-80: #ffbd96;
+  --redorange-70: #ff9b61;
+  --redorange-60: #ff7b2e;
+  --redorange-50: #ff5e00;
+  --redorange-40: #c94a00;
+  --redorange-30: #913500;
+
+  --orange-95: #fef4e6;
+  --orange-90: #fee6c6;
+  --orange-80: #ffd49c;
+  --orange-70: #ffc06e;
+  --orange-60: #ffa938;
+  --orange-50: #ff9200;
+  --orange-40: #d47800;
+  --orange-30: #9c5800;
+
+  --lightblue-95: #e5f6fe;
+  --lightblue-90: #c4ecfe;
+  --lightblue-80: #a1e1ff;
+  --lightblue-70: #70d2ff;
+  --lightblue-60: #3dc2ff;
+  --lightblue-50: #00aeff;
+  --lightblue-40: #008dcf;
+  --lightblue-30: #006796;
+
+  --pink-95: #feecfb;
+  --pink-90: #fed3f7;
+  --pink-80: #ffb8f3;
+  --pink-70: #ff94ed;
+  --pink-60: #fa73e3;
+  --pink-50: #f553da;
+  --pink-40: #d331b8;
+  --pink-30: #a81690;
+
+  --red-95: #feecec;
+  --red-90: #fed5d5;
+  --red-80: #ffb5b5;
+  --red-70: #ff8c8c;
+  --red-60: #ff6363;
+  --red-50: #ff4242;
+  --red-40: #e52222;
+  --red-30: #b00c0c;
+
+  --cool-99: #f7f7f8;
+  --cool-98: #f4f4f5;
+  --cool-97: #eaebec;
+  --cool-96: #e1e2e4;
+  --cool-95: #dbdcdf;
+  --cool-90: #c2c4c8;
+  --cool-80: #aeb0b6;
+  --cool-70: #989ba2;
+  --cool-60: #878a93;
+  --cool-50: #70737c;
+  --cool-40: #5a5c63;
+  --cool-30: #46474c;
+  --cool-22: #2e2f33;
+  --cool-15: #1b1c1e;
+  --cool-10: #171719;
+  --cool-5: #0f0f10;
+
+  /* ---------- Semantic · Light ---------- */
+  --label-strong: #000000;
+  --label-normal: #171719;
+  --label-neutral: rgba(46, 47, 51, 0.88);
+  --label-alt: rgba(55, 56, 60, 0.74);
+  --label-assist: rgba(55, 56, 60, 0.34);
+  --label-disable: rgba(55, 56, 60, 0.16);
+
+  --line: rgba(112, 115, 124, 0.22);
+  --line-alt: rgba(112, 115, 124, 0.1);
+  --line-strong: rgba(112, 115, 124, 0.52);
+
+  --bg: #ffffff;
+  --bg-alt: #f7f7f8;
+  --bg-elevated: #ffffff;
+  --fill: rgba(112, 115, 124, 0.08);
+  --fill-strong: rgba(112, 115, 124, 0.16);
+
+  /* Primary: 맑고 차가운 에메랄드 초록 */
+  --primary: #00a67e;
+  --primary-strong: #008f6c; /* hover */
+  --primary-weak: rgba(0, 166, 126, 0.1);
+  --primary-text: #00805f; /* 작은 글자·링크·배지 (흰 바탕 대비) */
+  --on-primary: #ffffff;
+
+  --inverse-bg: #171719;
+  --inverse-label: #ffffff;
+  --code-bg: #f7f7f8;
+
+  --positive: #00bf40;
+  --cautionary: #ff9200;
+  --negative: #ff4242;
+
+  /* ---------- Radius ---------- */
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 8px;
+  --r-btn: 10px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+  --r-2xl: 20px;
+  --r-3xl: 24px;
+  --r-full: 999px;
+
+  /* ---------- Spacing (4의 배수) ---------- */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-56: 56px;
+  --space-80: 80px;
+
+  /* ---------- Shadow ---------- */
+  --shadow-xs: 0 1px 2px rgba(23, 23, 25, 0.06);
+  --shadow-sm: 0 1px 2px rgba(23, 23, 25, 0.04), 0 4px 16px rgba(23, 23, 25, 0.06);
+  --shadow-md: 0 2px 6px rgba(23, 23, 25, 0.04), 0 12px 32px rgba(23, 23, 25, 0.08);
+  --shadow-lg: 0 4px 12px rgba(23, 23, 25, 0.06), 0 24px 56px rgba(23, 23, 25, 0.14);
+
+  /* ---------- Motion ---------- */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.3, 0.64, 1);
+  --dur-fast: 160ms;
+  --dur: 240ms;
+  --dur-slow: 420ms;
+
+  /* ---------- Layout ---------- */
+  --container: 1200px;
+  --gutter: 24px;
+  --gnb-height: 64px;
+
+  /* ---------- Font ---------- */
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
+    "Noto Sans KR", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+/* ---------- Semantic · Dark ----------
+ * 사이트 전체가 아니라 필요한 화면(Gallery)이나 영역에만 data-theme="dark"를 붙여요. */
+[data-theme="dark"] {
+  --label-strong: #ffffff;
+  --label-normal: #f7f7f8;
+  --label-neutral: rgba(219, 220, 223, 0.88);
+  --label-alt: rgba(194, 196, 200, 0.74);
+  --label-assist: rgba(174, 176, 182, 0.4);
+  --label-disable: rgba(174, 176, 182, 0.18);
+
+  --line: rgba(112, 115, 124, 0.36);
+  --line-alt: rgba(112, 115, 124, 0.2);
+  --line-strong: rgba(174, 176, 182, 0.52);
+
+  --bg: #0f0f10;
+  --bg-alt: #171719;
+  --bg-elevated: #1b1c1e;
+  --fill: rgba(112, 115, 124, 0.18);
+  --fill-strong: rgba(112, 115, 124, 0.28);
+
+  --primary: #34d3a6;
+  --primary-strong: #5ee0ba;
+  --primary-weak: rgba(52, 211, 166, 0.16);
+  --primary-text: #34d3a6;
+  --on-primary: #0f0f10;
+
+  --inverse-bg: #f7f7f8;
+  --inverse-label: #171719;
+  --code-bg: #141516;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 24px 56px rgba(0, 0, 0, 0.5);
+
+  color-scheme: dark;
+}

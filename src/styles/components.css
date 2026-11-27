@@ -1,0 +1,485 @@
+/*
+ * 공통 컴포넌트 13종. 클래스 이름은 디자인 캔버스(최종 · 통일된 디자인 + 디자인 시스템)와 같아요.
+ * React 래퍼는 src/components/ui 에 있어요.
+ */
+
+/* ---------- Layout ---------- */
+.l-container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* ---------- 1. GNB ---------- */
+.c-gnb {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line-alt);
+}
+.c-gnb--overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  background: transparent;
+  border-bottom-color: transparent;
+}
+.c-gnb__in {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  height: var(--gnb-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.c-gnb__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--label-strong);
+}
+.c-gnb__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--r-full);
+  background: var(--primary);
+}
+.c-gnb__nav {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.c-gnb__nav::-webkit-scrollbar {
+  display: none;
+}
+.c-gnb__link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  height: var(--gnb-height);
+  padding: 0 14px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--label-alt);
+  transition: color var(--dur-fast);
+}
+.c-gnb__link:hover {
+  color: var(--label-normal);
+}
+.c-gnb__link[aria-current="page"] {
+  font-weight: 600;
+  color: var(--label-normal);
+}
+.c-gnb__link[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 0;
+  height: 2px;
+  background: var(--label-normal);
+}
+@media (max-width: 560px) {
+  .c-gnb__link {
+    padding: 0 8px;
+    font-size: 14px;
+  }
+  .c-gnb__link[aria-current="page"]::after {
+    left: 8px;
+    right: 8px;
+  }
+}
+
+/* ---------- 2. Footer ---------- */
+.c-footer {
+  border-top: 1px solid var(--line-alt);
+}
+.c-footer__in {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 28px var(--gutter) 40px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--label-alt);
+}
+
+/* ---------- 3. Page heading ---------- */
+.c-page-title {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: var(--space-56) 0 var(--space-32);
+}
+.c-page-title__title {
+  margin: 0;
+}
+.c-page-title__desc {
+  margin: 0;
+  color: var(--label-alt);
+}
+.c-eyebrow {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.0145em;
+  color: var(--primary-text);
+}
+
+/* ---------- 4. Button ---------- */
+.c-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-radius: var(--r-btn);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.0096em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--dur-fast), border-color var(--dur-fast), color var(--dur-fast),
+    box-shadow var(--dur-fast), opacity var(--dur-fast);
+}
+.c-btn--lg {
+  height: 48px;
+  padding: 0 24px;
+  border-radius: var(--r-lg);
+  font-size: 16px;
+}
+.c-btn--sm {
+  height: 32px;
+  padding: 0 12px;
+  border-radius: var(--r-md);
+  font-size: 13px;
+}
+.c-btn--primary {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+.c-btn--primary:hover {
+  background: var(--primary-strong);
+}
+.c-btn--inverse {
+  background: var(--inverse-bg);
+  color: var(--inverse-label);
+}
+.c-btn--inverse:hover {
+  opacity: 0.88;
+}
+.c-btn--outline {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--label-normal);
+}
+.c-btn--outline:hover {
+  background: var(--fill);
+}
+.c-btn--assist {
+  background: var(--fill);
+  color: var(--label-normal);
+}
+.c-btn--assist:hover {
+  background: var(--fill-strong);
+}
+.c-btn--text {
+  height: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--primary-text);
+}
+.c-btn--text:hover {
+  color: var(--primary-strong);
+}
+.c-btn:disabled,
+.c-btn[aria-disabled="true"] {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ---------- 5. Icon button ---------- */
+.c-icbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  background: var(--bg-elevated);
+  color: var(--label-normal);
+  cursor: pointer;
+  transition: background var(--dur-fast), border-color var(--dur-fast), transform var(--dur)
+    var(--ease-spring);
+}
+.c-icbtn:hover {
+  background: var(--fill);
+  transform: translateY(-1px);
+}
+.c-icbtn--solid {
+  background: var(--inverse-bg);
+  border-color: var(--inverse-bg);
+  color: var(--inverse-label);
+}
+.c-icbtn--solid:hover {
+  background: var(--inverse-bg);
+  opacity: 0.88;
+}
+.c-icbtn--sm {
+  width: 32px;
+  height: 32px;
+}
+.c-icbtn:disabled {
+  opacity: 0.4;
+  cursor: default;
+  transform: none;
+}
+
+/* ---------- 6. Chip ---------- */
+.c-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-btn);
+  background: var(--bg-elevated);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--label-neutral);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--dur-fast), border-color var(--dur-fast), color var(--dur-fast);
+}
+.c-chip:hover {
+  background: var(--fill);
+}
+.c-chip[aria-pressed="true"] {
+  background: var(--inverse-bg);
+  border-color: var(--inverse-bg);
+  color: var(--inverse-label);
+}
+/* 다크 화면(Gallery)에서는 선택된 칩을 primary로 */
+[data-theme="dark"] .c-chip[aria-pressed="true"] {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
+}
+.c-chip__n {
+  font-size: 13px;
+  opacity: 0.6;
+  font-variant-numeric: tabular-nums;
+}
+.c-chip__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--r-full);
+  flex: 0 0 auto;
+}
+.c-chip--sm {
+  height: 32px;
+  padding: 0 12px;
+  border-radius: var(--r-md);
+  font-size: 13px;
+}
+
+/* ---------- 7. Segmented control ---------- */
+.c-seg {
+  display: inline-flex;
+  padding: 4px;
+  border-radius: var(--r-btn);
+  background: var(--fill);
+}
+.c-seg__btn {
+  height: 32px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: var(--r-md);
+  background: transparent;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--label-alt);
+  cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.c-seg__btn:hover {
+  color: var(--label-normal);
+}
+.c-seg__btn[aria-checked="true"] {
+  background: var(--bg-elevated);
+  color: var(--label-normal);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---------- 8. Tabs ---------- */
+.c-tabs {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  min-width: 0;
+  border-bottom: 1px solid var(--line-alt);
+  scrollbar-width: none;
+}
+.c-tabs::-webkit-scrollbar {
+  display: none;
+}
+.c-tab {
+  position: relative;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 48px;
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--label-alt);
+  cursor: pointer;
+  transition: color var(--dur-fast);
+}
+.c-tab:hover {
+  color: var(--label-normal);
+}
+.c-tab[aria-selected="true"] {
+  color: var(--label-normal);
+}
+.c-tab[aria-selected="true"]::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 0;
+  height: 2px;
+  background: var(--label-normal);
+}
+.c-tab__n {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--label-assist);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- 9. Badge ---------- */
+.c-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 24px;
+  padding: 0 8px;
+  border-radius: var(--r-sm);
+  background: var(--fill);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.0252em;
+  color: var(--label-neutral);
+  white-space: nowrap;
+}
+.c-badge--primary {
+  background: var(--primary-weak);
+  color: var(--primary-text);
+}
+
+/* ---------- 10. Card · Thumbnail ---------- */
+.c-card {
+  border-radius: var(--r-xl);
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-sm);
+}
+.c-card--line {
+  box-shadow: none;
+  border: 1px solid var(--line-alt);
+}
+.c-card--float {
+  box-shadow: var(--shadow-md);
+}
+.c-card--interactive {
+  transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease-spring);
+}
+.c-card--interactive:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.c-thumb {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: var(--r-lg);
+  background: var(--bg-alt);
+  color: var(--label-assist);
+  font-size: 12px;
+}
+.c-thumb > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 360ms var(--ease);
+}
+.c-card--interactive:hover .c-thumb > img {
+  transform: scale(1.03);
+}
+
+/* ---------- 11. Progress ---------- */
+.c-progress {
+  position: relative;
+  display: block;
+  height: 4px;
+  border-radius: var(--r-full);
+  background: var(--fill);
+  overflow: hidden;
+}
+.c-progress--thin {
+  height: 2px;
+}
+.c-progress__bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: var(--r-full);
+  background: var(--primary);
+  transition: width var(--dur) var(--ease);
+}
+.c-progress-steps {
+  display: flex;
+  gap: 6px;
+}
+.c-progress-steps > .c-progress {
+  flex: 1;
+}
+
+/* ---------- 12. Status text ---------- */
+.c-status {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.0252em;
+  color: var(--label-alt);
+  font-variant-numeric: tabular-nums;
+}
