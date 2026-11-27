@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
-import { ComingSoon } from "@/components/site/ComingSoon";
+import { GalleryGlobe } from "./GalleryGlobe";
+import "./gallery.css";
 
-export const metadata: Metadata = { title: "Gallery" };
+export const metadata: Metadata = {
+  title: "Gallery",
+  description: "카메라를 들었던 곳들을 지구본 위에 모았어요.",
+};
 
-export default function Page() {
-  return <ComingSoon title="Gallery" description="카메라를 들었던 곳들이에요." />;
+export default function GalleryPage() {
+  return <GalleryGlobe />;
 }
