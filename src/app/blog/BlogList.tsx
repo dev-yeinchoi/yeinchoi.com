@@ -50,7 +50,12 @@ export function BlogList({ posts }: { posts: PostMeta[] }) {
     <>
       <section aria-label="대표 글" className="b-lead-wrap">
         <Link href={`/blog/${lead.slug}`} className="b-lead">
-          <BlogThumb cover={lead.cover} category={lead.category} iconSize={56} className="b-thumb b-thumb--lead" />
+          <BlogThumb
+            cover={lead.cover}
+            category={lead.category}
+            iconSize={56}
+            className="b-thumb b-thumb--lead"
+          />
           <span className="b-lead__text">
             <span className="b-lead__meta">
               <Badge tone="primary">최신 글</Badge>
@@ -108,7 +113,12 @@ export function BlogList({ posts }: { posts: PostMeta[] }) {
                     {formatDate(p.date)} · {p.readingTime}분
                   </span>
                 </span>
-                <BlogThumb cover={p.cover} category={p.category} iconSize={32} className="b-thumb b-thumb--row" />
+                <BlogThumb
+                  cover={p.cover}
+                  category={p.category}
+                  iconSize={32}
+                  className="b-thumb b-thumb--row"
+                />
               </Link>
             </li>
           ))}
