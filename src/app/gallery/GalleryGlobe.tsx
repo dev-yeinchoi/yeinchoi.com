@@ -5,8 +5,30 @@ import { useEffect, useRef, useState } from "react";
 import { Chip, Icon, IconButton, StatusText } from "@/components/ui";
 import { type Place, places } from "@/content/gallery";
 
-const EARTH_IMAGE = "/images/gallery/earth.png";
 const AUTOPLAY_MS = 4500;
+
+/** 지구 색: 시안 그림과 같은 바다 파랑, 땅 초록, 극지방 흰색 */
+const LAND = "#95D5AA";
+const LAND_SIDE = "rgba(80, 150, 110, 0.6)";
+const ICE = "#EEF2FA";
+/** Natural Earth 나라 번호: 남극(010), 그린란드(304)는 흰색으로 */
+const ICE_IDS = new Set(["010", "304"]);
+
+/** 바다는 위아래가 조금 밝은 세로 그라데이션. 이미지 대신 그때그때 그려서 흐려지지 않아요. */
+function oceanTexture(): string {
+  const c = document.createElement("canvas");
+  c.width = 8;
+  c.height = 1024;
+  const ctx = c.getContext("2d");
+  if (!ctx) return "";
+  const grad = ctx.createLinearGradient(0, 0, 0, c.height);
+  grad.addColorStop(0, "#4470C9");
+  grad.addColorStop(0.5, "#2346A8");
+  grad.addColorStop(1, "#4470C9");
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, c.width, c.height);
+  return c.toDataURL("image/png");
+}
 
 const tint = (p: Place) => `var(--${p.hue}-90)`;
 
@@ -58,12 +80,22 @@ export function GalleryGlobe() {
     let disposed = false;
     let ro: ResizeObserver | undefined;
 
-    import("globe.gl")
-      .then(({ default: Globe }) => {
+    Promise.all([import("globe.gl"), import("topojson-client"), import("world-atlas/countries-50m.json")])
+      .then(([{ default: Globe }, topojson, atlas]) => {
         if (disposed) return;
-        const g = new Globe(el)
+        // biome-ignore lint/suspicious/noExplicitAny: world-atlas JSON에는 타입이 없어요
+        const world = (atlas as any).default ?? atlas;
+        const countries = topojson.feature(world, world.objects.countries) as unknown as {
+          features: Array<{ id?: string }>;
+        };
+        const g = new Globe(el, { rendererConfig: { antialias: true, alpha: true } })
           .backgroundColor("rgba(0,0,0,0)")
-          .globeImageUrl(EARTH_IMAGE)
+          .globeImageUrl(oceanTexture())
+          .polygonsData(countries.features)
+          .polygonCapColor((f) => (ICE_IDS.has(String((f as { id?: string }).id)) ? ICE : LAND))
+          .polygonSideColor(() => LAND_SIDE)
+          .polygonStrokeColor(() => false)
+          .polygonAltitude(0.004)
           .showAtmosphere(true)
           .atmosphereColor("#7FA8FF")
           .atmosphereAltitude(0.22)
@@ -93,6 +125,9 @@ export function GalleryGlobe() {
             pins.current[i] = pin;
             return pin;
           });
+
+        // 레티나 화면에서도 또렷하게
+        g.renderer().setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
         const size = () => {
           g.width(el.clientWidth);

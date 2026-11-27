@@ -5,11 +5,13 @@ main:has(.g-stage) {
   background: radial-gradient(ellipse at 70% 40%, #16213d 0%, var(--bg) 62%);
 }
 
+/* GNB 아래 화면 전체를 채워요 */
 .g-stage {
   position: relative;
-  max-width: 1280px;
-  height: 820px;
-  margin: 0 auto;
+  height: calc(100vh - var(--gnb-height));
+  height: calc(100svh - var(--gnb-height));
+  min-height: 560px;
+  overflow: hidden;
 }
 
 .g-stars {
@@ -216,6 +218,7 @@ main:has(.g-stage) {
     flex-direction: column;
     gap: 20px;
     height: auto;
+    min-height: calc(100svh - var(--gnb-height));
     padding: 40px var(--gutter) 40px;
   }
 
