@@ -1,0 +1,292 @@
+/* Blog · 목록 */
+
+.b-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: var(--space-56) var(--gutter) 72px;
+}
+
+.b-head {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 32px;
+}
+
+.b-head h1,
+.b-head p {
+  margin: 0;
+}
+
+.b-head p {
+  color: var(--label-alt);
+}
+
+.b-empty {
+  padding: 24px;
+}
+
+/* 썸네일: 대표 이미지 또는 카테고리 아이콘 */
+.b-thumb {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: var(--bg-alt);
+}
+
+.b-thumb__in {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--label-assist);
+  transition: transform 360ms var(--ease);
+}
+
+.b-thumb__in img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.b-thumb--lead {
+  aspect-ratio: 16 / 10;
+  border-radius: 16px;
+}
+
+.b-thumb--row {
+  width: 136px;
+  height: 92px;
+  border-radius: 12px;
+}
+
+.b-cat {
+  font-weight: 600;
+  color: var(--label-alt);
+}
+
+.b-date {
+  font-weight: 400;
+  color: var(--label-alt);
+}
+
+.b-excerpt {
+  color: var(--label-neutral);
+}
+
+.b-hover-title {
+  transition: color var(--dur-fast) ease;
+}
+
+/* 대표 글 */
+.b-lead-wrap {
+  padding-bottom: 48px;
+}
+
+.b-lead {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 32px;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+}
+
+.b-lead:hover .b-thumb__in {
+  transform: scale(1.03);
+}
+
+.b-lead:hover .b-hover-title {
+  color: var(--primary-text);
+}
+
+.b-lead__text {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.b-lead__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.b-lead__title {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.36;
+  letter-spacing: -0.024em;
+}
+
+/* 탭 + 정렬 */
+.b-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--line-alt);
+}
+
+.b-toolbar .c-tabs {
+  flex: 1 1 auto;
+}
+
+.b-toolbar .c-seg {
+  flex: 0 0 auto;
+}
+
+/* 목록 */
+.b-rows {
+  margin: 0;
+  padding: 8px 0 0;
+  list-style: none;
+  animation: b-fade 240ms ease both;
+}
+
+.b-rows li {
+  border-bottom: 1px solid var(--line-alt);
+}
+
+.b-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 136px;
+  gap: 24px;
+  align-items: center;
+  margin: 0 -16px;
+  padding: 24px 16px;
+  border-radius: 12px;
+  color: inherit;
+  text-decoration: none;
+  transition: background var(--dur-fast) ease;
+}
+
+.b-row:hover {
+  background: var(--fill);
+}
+
+.b-row:hover .b-hover-title {
+  color: var(--primary-text);
+}
+
+.b-row__text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.b-row__title {
+  overflow: hidden;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.445;
+  letter-spacing: -0.01em;
+  color: var(--label-normal);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.b-row__excerpt {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--label-neutral);
+}
+
+.b-none {
+  margin: 0;
+  padding: 40px 0;
+  text-align: center;
+}
+
+/* 페이지 번호 */
+.b-pager {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  padding-top: 40px;
+}
+
+.b-pager button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--label-alt);
+  cursor: pointer;
+  transition: background var(--dur-fast) ease;
+}
+
+.b-pager button:hover:not(:disabled):not(.is-current) {
+  background: var(--fill);
+}
+
+.b-pager__arrow {
+  color: var(--label-normal) !important;
+}
+
+.b-pager__arrow:disabled {
+  color: var(--label-assist) !important;
+  cursor: default;
+}
+
+.b-pager__n.is-current {
+  background: var(--inverse-bg);
+  color: var(--inverse-label);
+}
+
+@keyframes b-fade {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .b-lead {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .b-lead__title {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 520px) {
+  .b-row {
+    grid-template-columns: minmax(0, 1fr) 88px;
+    gap: 16px;
+  }
+
+  .b-thumb--row {
+    width: 88px;
+    height: 64px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .b-rows {
+    animation: none;
+  }
+
+  .b-thumb__in {
+    transition: none;
+  }
+}
