@@ -29,9 +29,9 @@ export function BlogList({ posts }: { posts: PostMeta[] }) {
     );
   }
 
-  // 대표 글은 가장 최근 글이에요. 아래 목록에서는 빼요.
+  // 대표 글은 가장 최근 글이에요. 아래 목록과 카테고리 탭에도 함께 보여요.
   const lead = posts[0];
-  const filtered = posts.slice(1).filter((p) => tab === "all" || p.category === tab);
+  const filtered = posts.filter((p) => tab === "all" || p.category === tab);
   const sorted = sort === "new" ? filtered : [...filtered].reverse();
   const pageCount = Math.max(1, Math.ceil(sorted.length / PER_PAGE));
   const current = Math.min(page, pageCount - 1);
@@ -97,7 +97,7 @@ export function BlogList({ posts }: { posts: PostMeta[] }) {
       {rows.length === 0 ? (
         <p className="b-none">
           <StatusText>
-            {tab === "all" ? "대표 글 말고는 아직 글이 없어요." : "이 카테고리에는 아직 글이 없어요."}
+            이 카테고리에는 아직 글이 없어요.
           </StatusText>
         </p>
       ) : (
