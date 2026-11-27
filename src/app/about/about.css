@@ -1,0 +1,228 @@
+/* About — 왼쪽: 사진·이름·CV·연락처 (따라 내려와요), 오른쪽: 소개와 이력 */
+
+.about {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: var(--space-56) var(--gutter) 80px;
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 72px;
+}
+
+/* ---------- Side ---------- */
+.about__side {
+  position: sticky;
+  top: calc(var(--gnb-height) + 32px);
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.about__photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--r-xl);
+  object-fit: cover;
+  background: var(--bg-alt);
+}
+.about__id {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.about__name {
+  margin: 0;
+}
+.about__role {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--label-neutral);
+}
+.about__loc {
+  margin: 0;
+  font-size: 14px;
+  color: var(--label-alt);
+}
+
+.about__cv {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.about__cv-btn {
+  width: 100%;
+}
+.about__cv-btn:disabled {
+  opacity: 0.85;
+  cursor: progress;
+}
+.about__cv-msg {
+  min-height: 18px;
+  font-size: 13px;
+  color: var(--label-alt);
+}
+.about__cv-msg[data-bad] {
+  color: var(--negative);
+}
+@keyframes about-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.about__spin {
+  animation: about-spin 800ms linear infinite;
+}
+
+.about__contacts {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line-alt);
+}
+.about__contact {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr) 16px;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 0 10px;
+  margin: 0 -10px;
+  border-radius: var(--r-btn);
+  border-bottom: 1px solid var(--line-alt);
+  transition: background var(--dur-fast);
+}
+.about__contact:hover {
+  background: var(--fill);
+}
+.about__contact-icon {
+  display: flex;
+  color: var(--label-neutral);
+}
+.about__contact-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.about__contact-label {
+  font-size: 14px;
+  font-weight: 600;
+}
+.about__contact-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  color: var(--label-alt);
+}
+.about__contact-arrow {
+  display: flex;
+  color: var(--label-assist);
+}
+
+/* ---------- Main ---------- */
+.about__main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.about__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 24px;
+}
+.about__h {
+  margin: 0;
+}
+.about__intro {
+  margin: 0;
+  padding-bottom: 48px;
+  font-size: 17px;
+  line-height: 1.76;
+  color: var(--label-neutral);
+}
+.about__section {
+  padding: 32px 0;
+  border-top: 1px solid var(--line);
+}
+.about__section-title {
+  margin: 0 0 24px;
+}
+.about__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.about__item {
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr);
+  gap: 20px;
+}
+.about__period {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--label-alt);
+  font-variant-numeric: tabular-nums;
+}
+.about__item-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.about__item-title {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.about__item-sub {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--label-alt);
+}
+.about__item-desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--label-neutral);
+}
+
+/* ---------- Narrow screens ---------- */
+@media (max-width: 900px) {
+  .about {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+    padding-top: 32px;
+  }
+  .about__side {
+    position: static;
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+    column-gap: 20px;
+    row-gap: 20px;
+    align-items: center;
+  }
+  .about__photo {
+    border-radius: var(--r-lg);
+  }
+  .about__cv,
+  .about__contacts {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 560px) {
+  .about__item {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+  .about__period:empty {
+    display: none;
+  }
+  .about__item-body {
+    order: -1;
+  }
+}
